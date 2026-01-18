@@ -1,0 +1,116 @@
+# ============================================================================
+#                         ZIM FRAMEWORK CONFIGURATION
+#                              ~/.zimrc
+# ============================================================================
+# Zim is a Zsh configuration framework with blazing speed and modular
+# extension capabilities. This configuration file defines which modules
+# to load.
+#
+# After modifying this file, run: zimfw install
+# ============================================================================
+
+# ============================================================================
+# CORE MODULES
+# ============================================================================
+
+# Sets sane Zsh built-in environment options
+zmodule environment
+
+# Provides handy git aliases and functions
+zmodule git
+
+# Applies correct bindkeys for input events
+zmodule input
+
+# Sets a custom terminal title
+zmodule termtitle
+
+# Utility aliases and functions (ls, grep, etc. enhancements)
+zmodule utility
+
+# ============================================================================
+# PROMPT THEME - Powerlevel10k
+# Feature-rich, highly customizable, shows lots of useful info
+# ============================================================================
+
+# Powerlevel10k - the most informative and customizable prompt
+# Shows: user, host, directory, git status, time, exit codes, background jobs, etc.
+zmodule romkatv/powerlevel10k --use degit
+
+# Alternative themes (uncomment one and comment out powerlevel10k to use):
+# zmodule prompt-pwd      # Required dependency for simpler themes
+# zmodule git-info        # Required dependency for simpler themes
+# zmodule eriner          # Clean, fast, informative
+# zmodule minimal         # Minimalist theme
+# zmodule asciiship       # ASCII-based starship-like prompt
+
+# ============================================================================
+# COMPLETION
+# ============================================================================
+
+# Additional completion definitions
+# Must be loaded before completion module
+zmodule zsh-users/zsh-completions --fpath src
+
+# Enables and configures smart and extensive tab completion
+# Must be loaded after zsh-completions
+zmodule completion
+
+# ============================================================================
+# PRODUCTIVITY ENHANCEMENTS
+# From transcript: syntax highlighting, autosuggestions
+# ============================================================================
+
+# Syntax highlighting for commands while typing
+# From transcript: "Commands shown in green if valid, red if not"
+zmodule zsh-users/zsh-syntax-highlighting
+
+# Fish-like auto-suggestions based on history
+zmodule zsh-users/zsh-autosuggestions
+
+# Substring search in history (up/down arrows)
+# From transcript: "Cycle through commands of the same kind"
+zmodule zsh-users/zsh-history-substring-search
+
+# ============================================================================
+# TOOL INTEGRATIONS
+# ============================================================================
+
+# Zoxide integration (smart cd replacement)
+zmodule kiesman99/zim-zoxide
+
+# FZF integration (uncomment if you want zim to manage fzf)
+# zmodule junegunn/fzf --source shell/completion.zsh --source shell/key-bindings.zsh
+
+# ============================================================================
+# OPTIONAL MODULES
+# ============================================================================
+
+# Exa/eza aliases (modern ls replacement)
+zmodule exa
+
+# Archive extraction utilities
+zmodule archive
+
+# SSH agent management
+# zmodule ssh
+
+# Node.js version manager support
+# zmodule node
+
+# Python virtualenv support
+# zmodule python
+
+# ============================================================================
+# ORDER MATTERS!
+# ============================================================================
+# The following modules MUST be loaded in this order at the end:
+#   1. zsh-completions (fpath addition)
+#   2. completion (compinit)
+#   3. zsh-syntax-highlighting
+#   4. zsh-autosuggestions
+#   5. zsh-history-substring-search
+#
+# This ensures syntax highlighting works with autosuggestions and that
+# completions are properly initialized.
+# ============================================================================
