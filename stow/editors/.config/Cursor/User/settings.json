@@ -1,0 +1,16 @@
+{
+    "window.commandCenter": true,
+    "workbench.colorTheme": "Monokai",
+    "files.autoSave": "afterDelay",
+    "cursor.cmdk.useThemedDiffBackground2": false,
+    "workbench.editorAssociations": {
+        "*.md": "default"
+    },
+    "claudeCode.preferredLocation": "panel",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "/usr/bin/zsh"
+        }
+    }
+}

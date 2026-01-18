@@ -10,11 +10,21 @@ dotfiles/
 │   ├── zsh/          # Zsh configuration
 │   │   ├── .zshrc
 │   │   ├── .zimrc
-│   │   └── .p10k.zsh
+│   │   ├── .p10k.zsh
+│   │   └── .zshrc.local
 │   ├── tmux/         # Tmux configuration
 │   │   └── .tmux.conf
-│   └── nvim/         # Neovim configuration
-│       └── .config/nvim/init.lua
+│   ├── nvim/         # Neovim configuration
+│   │   └── .config/nvim/init.lua
+│   ├── shell/        # Shell configs (bash, profile)
+│   │   ├── .profile
+│   │   └── .bashrc
+│   ├── git/          # Git configuration
+│   │   └── .gitconfig
+│   └── editors/      # Editor configurations
+│       └── .config/
+│           ├── zed/settings.json
+│           └── Cursor/User/settings.json
 ├── stow.sh           # Stow manager script
 └── README.md
 ```
@@ -31,31 +41,34 @@ sudo apt install stow
 cd ~/dotfiles
 
 # Link all packages
-./stow.sh link
+bash stow.sh link
 
 # Link specific packages
-./stow.sh link zsh tmux
+bash stow.sh link zsh tmux
 
 # Unlink packages
-./stow.sh unlink nvim
+bash stow.sh unlink nvim
 
 # Relink after editing (restow)
-./stow.sh relink zsh
+bash stow.sh relink zsh
 
 # Check status
-./stow.sh status
+bash stow.sh status
 
 # List available packages
-./stow.sh list
+bash stow.sh list
 ```
 
 ## Packages
 
 | Package | Files | Description |
 |---------|-------|-------------|
-| zsh | `.zshrc`, `.zimrc`, `.p10k.zsh` | Zsh with Zim framework and Powerlevel10k |
+| zsh | `.zshrc`, `.zimrc`, `.p10k.zsh`, `.zshrc.local` | Zsh with Zim framework and Powerlevel10k |
 | tmux | `.tmux.conf` | Minimalist tmux configuration |
 | nvim | `.config/nvim/init.lua` | Neovim with lazy.nvim |
+| shell | `.profile`, `.bashrc` | Shell profile and bash configuration |
+| git | `.gitconfig` | Git configuration |
+| editors | `.config/zed/settings.json`, `.config/Cursor/User/settings.json` | Editor settings |
 
 ## Features
 
@@ -82,3 +95,7 @@ cd ~/dotfiles
 - Treesitter syntax highlighting
 - Telescope fuzzy finder
 - Tokyo Night theme
+
+### Editors
+- Zed: zsh terminal, rust-analyzer, basedpyright
+- Cursor: zsh terminal integration

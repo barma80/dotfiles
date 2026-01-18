@@ -1,0 +1,7 @@
+# Local zsh customizations
+# This file is sourced after the main .zshrc
+# Add your personal aliases and functions here
+
+# Example:
+# alias myproject='cd ~/projects/myproject'
+# myfunction() { echo "Hello from my function" }

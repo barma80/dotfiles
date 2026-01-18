@@ -1,0 +1,94 @@
+{
+  "agent": {
+    "default_profile": "write",
+    "always_allow_tool_actions": true,
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-thinking-latest"
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "theme": "One Light",
+  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_size": 14,
+  "ui_font_size": 14,
+  "terminal": {
+    "shell": {
+      "program": "/usr/bin/zsh"
+    },
+    "font_family": "JetBrains Mono",
+    "font_size": 13,
+    "detect_venv": {
+      "on": {
+        "directories": [".venv", "venv", ".env", "env"],
+        "activate_script": "default"
+      }
+    }
+  },
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "cargo": {
+          "features": "all"
+        },
+        "check": {
+          "command": "clippy"
+        }
+      }
+    },
+    "basedpyright": {
+      "settings": {
+        "basedpyright.analysis": {
+          "diagnosticMode": "openFilesOnly",
+          "typeCheckingMode": "standard",
+          "autoSearchPaths": true,
+          "useLibraryCodeForTypes": true,
+          "autoImportCompletions": true,
+          "inlayHints": {
+            "variableTypes": true,
+            "functionReturnTypes": true,
+            "callArgumentNames": true
+          }
+        }
+      }
+    },
+    "ruff": {
+      "initialization_options": {
+        "settings": {
+          "lineLength": 88,
+          "lint": {
+            "select": ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM"],
+            "ignore": []
+          },
+          "format": {
+            "quote-style": "double",
+            "indent-style": "space"
+          }
+        }
+      }
+    }
+  },
+  "languages": {
+    "Python": {
+      "format_on_save": "on",
+      "formatter": "language_server",
+      "code_actions_on_format": {
+        "source.organizeImports": true,
+        "source.fixAll": true
+      },
+      "language_servers": [
+        "basedpyright",
+        "ruff",
+        "..."
+      ],
+      "tab_size": 4,
+      "hard_tabs": false,
+      "preferred_line_length": 88,
+      "soft_wrap": "preferred_line_length"
+    },
+    "Rust": {
+      "format_on_save": "on"
+    }
+  }
+}

@@ -31,7 +31,7 @@ if ! command -v stow &>/dev/null; then
 fi
 
 # Available packages
-PACKAGES=(zsh tmux nvim)
+PACKAGES=(zsh tmux nvim shell git editors)
 
 usage() {
     cat << EOF
@@ -64,7 +64,7 @@ backup_existing() {
 
     case "$package" in
         zsh)
-            for f in ~/.zshrc ~/.zimrc ~/.p10k.zsh; do
+            for f in ~/.zshrc ~/.zimrc ~/.p10k.zsh ~/.zshrc.local; do
                 if [[ -f "$f" && ! -L "$f" ]]; then
                     mkdir -p "$backup_dir"
                     mv "$f" "$backup_dir/"
@@ -86,6 +86,31 @@ backup_existing() {
                 mv ~/.config/nvim/init.lua "$backup_dir/.config/nvim/"
                 log_info "Backed up ~/.config/nvim/init.lua"
             fi
+            ;;
+        shell)
+            for f in ~/.profile ~/.bashrc; do
+                if [[ -f "$f" && ! -L "$f" ]]; then
+                    mkdir -p "$backup_dir"
+                    mv "$f" "$backup_dir/"
+                    log_info "Backed up $f"
+                fi
+            done
+            ;;
+        git)
+            if [[ -f ~/.gitconfig && ! -L ~/.gitconfig ]]; then
+                mkdir -p "$backup_dir"
+                mv ~/.gitconfig "$backup_dir/"
+                log_info "Backed up ~/.gitconfig"
+            fi
+            ;;
+        editors)
+            for f in ~/.config/zed/settings.json ~/.config/Cursor/User/settings.json; do
+                if [[ -f "$f" && ! -L "$f" ]]; then
+                    mkdir -p "$backup_dir/$(dirname "$f" | sed "s|$HOME/||")"
+                    mv "$f" "$backup_dir/$(dirname "$f" | sed "s|$HOME/||")/"
+                    log_info "Backed up $f"
+                fi
+            done
             ;;
     esac
 }
@@ -149,12 +174,24 @@ show_status() {
                 check_link ~/.zshrc
                 check_link ~/.zimrc
                 check_link ~/.p10k.zsh
+                check_link ~/.zshrc.local
                 ;;
             tmux)
                 check_link ~/.tmux.conf
                 ;;
             nvim)
                 check_link ~/.config/nvim/init.lua
+                ;;
+            shell)
+                check_link ~/.profile
+                check_link ~/.bashrc
+                ;;
+            git)
+                check_link ~/.gitconfig
+                ;;
+            editors)
+                check_link ~/.config/zed/settings.json
+                check_link ~/.config/Cursor/User/settings.json
                 ;;
         esac
     done
@@ -180,9 +217,12 @@ list_packages() {
     for package in "${PACKAGES[@]}"; do
         echo "  - $package"
         case "$package" in
-            zsh)  echo "      .zshrc, .zimrc, .p10k.zsh" ;;
-            tmux) echo "      .tmux.conf" ;;
-            nvim) echo "      .config/nvim/init.lua" ;;
+            zsh)     echo "      .zshrc, .zimrc, .p10k.zsh, .zshrc.local" ;;
+            tmux)    echo "      .tmux.conf" ;;
+            nvim)    echo "      .config/nvim/init.lua" ;;
+            shell)   echo "      .profile, .bashrc" ;;
+            git)     echo "      .gitconfig" ;;
+            editors) echo "      .config/zed/settings.json, .config/Cursor/User/settings.json" ;;
         esac
     done
     echo ""
