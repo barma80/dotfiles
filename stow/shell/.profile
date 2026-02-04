@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/profile.pre.bash" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/profile.pre.bash"
 # ~/.profile: executed by the command interpreter for login shells.
 # This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
 # exists.
@@ -42,3 +44,10 @@ if [ -n "$BASH_VERSION" ]; then
 elif [ -n "$ZSH_VERSION" ]; then
     eval "$(pyenv init - zsh)"
 fi
+
+# GNOME Terminal Configuration
+export TERM=xterm-256color
+export COLORTERM=truecolor
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/profile.post.bash" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/profile.post.bash"

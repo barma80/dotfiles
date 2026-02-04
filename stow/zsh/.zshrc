@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh"
 # ============================================================================
 #                           ZSH CONFIGURATION
 #                    Pop!_OS Optimized Shell Setup
@@ -41,6 +43,9 @@ export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 # ============================================================================
 
 ZIM_HOME="${ZIM_HOME:-$HOME/.zim}"
+
+# Prevent compinit from being called before Zim's completion module
+skip_global_compinit=1
 
 # Download zimfw plugin manager if missing
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
@@ -291,6 +296,8 @@ alias j='jobs -l'
 alias path='echo -e ${PATH//:/\\n}'
 alias now='date +"%Y-%m-%d %H:%M:%S"'
 alias week='date +%V'
+alias trash='gio trash --empty'
+alias whatsapp='gtk-launch whatsapp-webapp'
 
 # ============================================================================
 # ALIASES - SUFFIX
@@ -675,3 +682,119 @@ _auto_venv
 # ============================================================================
 # END OF CONFIGURATION
 # ============================================================================
+alias tb="thunderbird"
+alias mail="thunderbird"
+alias teams="/opt/teams-for-linux/teams-for-linux --enable-features=UseOzonePlatform --ozone-platform=wayland"
+alias pomodoro="gnome-pomodoro"
+alias productivity="superproductivity"
+
+# GNOME Terminal specific fixes
+if [ "$TERM_PROGRAM" = "gnome-terminal" ] || [ -n "$GNOME_TERMINAL_SCREEN" ]; then
+    # Ensure proper terminal type
+    export TERM=xterm-256color
+    export COLORTERM=truecolor
+    
+    # Fix for Powerlevel10k in GNOME Terminal
+    # Some terminals need explicit color support
+    export POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
+    
+    # Font fallback if JetBrains Mono not available
+    if ! fc-list | grep -q "JetBrains Mono"; then
+        export POWERLEVEL9K_MODE='compatible'
+    fi
+fi
+
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh"
+export ANDROID_NDK_HOME="$HOME/android-ndk-r27c"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# System cleanup alias
+alias cleanup='~/.local/bin/system-cleanup'
+alias clean='~/.local/bin/system-cleanup'
+
+# System stability/recovery aliases
+alias recover='~/.local/bin/system-recover'
+alias fix='~/.local/bin/system-recover'
+alias status='~/.local/bin/system-status'
+alias health='~/.local/bin/system-status'
+alias watchlogs='~/.local/bin/system-watchlogs'
+alias logs='~/.local/bin/system-watchlogs'
+
+# Android Development
+[ -f ~/.android-env ] && source ~/.android-env
+
+# Quick browser hang recovery
+alias browser-fix="~/projects/pop-os-config/scripts/102-browser-hang-recovery.sh"
+
+# MuseBook Development
+# Added by musebook-riscv-setup
+
+# Quick SSH access
+alias mb='ssh musebook'
+alias mbt='ssh -t musebook "htop"'
+alias mbinfo='ssh musebook "neofetch 2>/dev/null || uname -a"'
+
+# Development workflow
+alias mbs='musebook-sync'
+alias mbb='musebook-build'
+alias mbbr='musebook-build . release'
+alias mbd='musebook-build . debug'
+alias mbtst='musebook-test'
+alias mbbnch='musebook-bench'
+alias mbsh='musebook-shell'
+alias mbclaude='musebook-claude'
+
+# Quick project access
+alias aiden='cd ~/aiden-riscv-lab'
+
+# Workflow function: edit locally, build on musebook
+mb-dev() {
+    local cmd="$1"
+    case "$cmd" in
+        sync)  musebook-sync . ;;
+        build) musebook-build . ;;
+        test)  musebook-test . ;;
+        bench) musebook-bench . ;;
+        shell) musebook-shell ;;
+        *)     echo "Usage: mb-dev {sync|build|test|bench|shell}" ;;
+    esac
+}
+alias ai-assist='flatpak run moe.nyarchlinux.assistant'
+
+# ============================================================================
+# DATA DRIVE - NVMe SSD for ML/AI
+# ============================================================================
+hash -d data=/data
+hash -d models=/data/models
+hash -d datasets=/data/datasets
+hash -d checkpoints=/data/checkpoints
+hash -d experiments=/data/experiments
+
+# Quick access aliases
+alias data='cd /data'
+alias models='cd /data/models'
+alias datasets='cd /data/datasets'
+
+# Environment variables for ML frameworks
+export DATA_DIR="/data"
+export MODELS_DIR="/data/models"
+export DATASETS_DIR="/data/datasets"
+export CHECKPOINTS_DIR="/data/checkpoints"
+export HF_HOME="/data/cache/huggingface"
+export TORCH_HOME="/data/cache/torch"
+export TRANSFORMERS_CACHE="/data/cache/huggingface/transformers"
+
+# ============================================================================
+# AI TOOLS - Direct Commands
+# ============================================================================
+alias jan='/data/ai-tools/jan/jan.AppImage --no-sandbox'
+alias comfyui='/data/ai-tools/ComfyUI/start-comfyui.sh'
+alias whisper='/data/ai-tools/whisper.cpp/build/bin/whisper-cli'
+alias whisper-server='/data/ai-tools/whisper.cpp/build/bin/whisper-server'
+alias ml='source /data/ai-tools/activate-ml.sh'
+alias jupyter-ml='/data/ai-tools/start-jupyter.sh'
+
+# Microsoft Edge
+alias edge="microsoft-edge"

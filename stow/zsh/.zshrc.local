@@ -5,3 +5,4 @@
 # Example:
 # alias myproject='cd ~/projects/myproject'
 # myfunction() { echo "Hello from my function" }
+[ -f "$HOME/.zshrc.device" ] && source "$HOME/.zshrc.device"

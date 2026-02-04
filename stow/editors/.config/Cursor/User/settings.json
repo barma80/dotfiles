@@ -1,16 +1,23 @@
 {
     "window.commandCenter": true,
-    "workbench.colorTheme": "Monokai",
+    "workbench.colorTheme": "One Dark Modern",
     "files.autoSave": "afterDelay",
     "cursor.cmdk.useThemedDiffBackground2": false,
     "workbench.editorAssociations": {
-        "*.md": "default"
+        "*.md": "default",
+        "*.xlsx": "xlsxViewer.xlsx"
     },
     "claudeCode.preferredLocation": "panel",
     "terminal.integrated.defaultProfile.linux": "zsh",
     "terminal.integrated.profiles.linux": {
         "zsh": {
-            "path": "/usr/bin/zsh"
+            "path": "/usr/bin/zsh",
+            "args": [
+                "-l"
+            ]
         }
-    }
+    },
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.defaultProfile.windows": "zsh",
+    "terminal.integrated.env.linux": {}
 }

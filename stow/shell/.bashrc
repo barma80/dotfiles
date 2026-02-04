@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/bashrc.pre.bash" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/bashrc.pre.bash"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -187,3 +189,48 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # opencode
 export PATH=/home/barma80/.opencode/bin:$PATH
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/bashrc.post.bash" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/bashrc.post.bash"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Android Development
+[ -f ~/.android-env ] && source ~/.android-env
+
+# Quick browser hang recovery
+alias browser-fix="~/projects/pop-os-config/scripts/102-browser-hang-recovery.sh"
+
+# MuseBook Development
+# Added by musebook-riscv-setup
+
+# Quick SSH access
+alias mb='ssh musebook'
+alias mbt='ssh -t musebook "htop"'
+alias mbinfo='ssh musebook "neofetch 2>/dev/null || uname -a"'
+
+# Development workflow
+alias mbs='musebook-sync'
+alias mbb='musebook-build'
+alias mbbr='musebook-build . release'
+alias mbd='musebook-build . debug'
+alias mbtst='musebook-test'
+alias mbbnch='musebook-bench'
+alias mbsh='musebook-shell'
+alias mbclaude='musebook-claude'
+
+# Quick project access
+alias aiden='cd ~/aiden-riscv-lab'
+
+# Workflow function: edit locally, build on musebook
+mb-dev() {
+    local cmd="$1"
+    case "$cmd" in
+        sync)  musebook-sync . ;;
+        build) musebook-build . ;;
+        test)  musebook-test . ;;
+        bench) musebook-bench . ;;
+        shell) musebook-shell ;;
+        *)     echo "Usage: mb-dev {sync|build|test|bench|shell}" ;;
+    esac
+}
+alias ai-assist='flatpak run moe.nyarchlinux.assistant'

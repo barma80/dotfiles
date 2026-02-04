@@ -4,10 +4,10 @@
     "always_allow_tool_actions": true,
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-sonnet-4-5-thinking-latest"
+      "model": "claude-sonnet-4-5-thinking-latest",
     },
     "favorite_models": [],
-    "model_parameters": []
+    "model_parameters": [],
   },
   "theme": "One Light",
   "buffer_font_family": "JetBrains Mono",
@@ -15,27 +15,30 @@
   "ui_font_size": 14,
   "terminal": {
     "shell": {
-      "program": "/usr/bin/zsh"
+      "with_arguments": {
+        "program": "/usr/bin/zsh",
+        "args": ["-l"],
+      },
     },
     "font_family": "JetBrains Mono",
     "font_size": 13,
     "detect_venv": {
       "on": {
         "directories": [".venv", "venv", ".env", "env"],
-        "activate_script": "default"
-      }
-    }
+        "activate_script": "default",
+      },
+    },
   },
   "lsp": {
     "rust-analyzer": {
       "initialization_options": {
         "cargo": {
-          "features": "all"
+          "features": "all",
         },
         "check": {
-          "command": "clippy"
-        }
-      }
+          "command": "clippy",
+        },
+      },
     },
     "basedpyright": {
       "settings": {
@@ -48,10 +51,10 @@
           "inlayHints": {
             "variableTypes": true,
             "functionReturnTypes": true,
-            "callArgumentNames": true
-          }
-        }
-      }
+            "callArgumentNames": true,
+          },
+        },
+      },
     },
     "ruff": {
       "initialization_options": {
@@ -59,15 +62,15 @@
           "lineLength": 88,
           "lint": {
             "select": ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM"],
-            "ignore": []
+            "ignore": [],
           },
           "format": {
             "quote-style": "double",
-            "indent-style": "space"
-          }
-        }
-      }
-    }
+            "indent-style": "space",
+          },
+        },
+      },
+    },
   },
   "languages": {
     "Python": {
@@ -75,20 +78,16 @@
       "formatter": "language_server",
       "code_actions_on_format": {
         "source.organizeImports": true,
-        "source.fixAll": true
+        "source.fixAll": true,
       },
-      "language_servers": [
-        "basedpyright",
-        "ruff",
-        "..."
-      ],
+      "language_servers": ["basedpyright", "ruff", "..."],
       "tab_size": 4,
       "hard_tabs": false,
       "preferred_line_length": 88,
-      "soft_wrap": "preferred_line_length"
+      "soft_wrap": "preferred_line_length",
     },
     "Rust": {
-      "format_on_save": "on"
-    }
-  }
+      "format_on_save": "on",
+    },
+  },
 }
